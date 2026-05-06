@@ -42,11 +42,12 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-connectDB().then(async () => {
-  // Auto-seed disabled: dashboard opens setup-mode when 0 users exist.
-  // Re-enable by uncommenting the line below.
-  // await seedDefaultAdmin();
+connectDB();
+
+if (process.env.NODE_ENV !== "production") {
   app.listen(PORT, () => {
     console.log(`API running on http://localhost:${PORT}`);
   });
-});
+}
+
+module.exports = app;
